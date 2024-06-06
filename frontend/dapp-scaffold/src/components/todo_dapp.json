@@ -1,0 +1,198 @@
+{
+  "address": "CMTzqVU6BRtBLWzDvkrXhHcT2ZvJteKydwZ29LkwrYmJ",
+  "metadata": {
+    "name": "todo_dapp",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "complete_task",
+      "discriminator": [
+        109,
+        167,
+        192,
+        41,
+        129,
+        108,
+        220,
+        196
+      ],
+      "accounts": [
+        {
+          "name": "task",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "signer": true,
+          "relations": [
+            "task"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "completed",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "create_task",
+      "discriminator": [
+        194,
+        80,
+        6,
+        180,
+        232,
+        127,
+        48,
+        171
+      ],
+      "accounts": [
+        {
+          "name": "task",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "task_description",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "description",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "delete_task",
+      "discriminator": [
+        112,
+        220,
+        10,
+        109,
+        3,
+        168,
+        46,
+        73
+      ],
+      "accounts": [
+        {
+          "name": "task",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "signer": true,
+          "relations": [
+            "task"
+          ]
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Task",
+      "discriminator": [
+        79,
+        34,
+        229,
+        55,
+        88,
+        90,
+        55,
+        84
+      ]
+    },
+    {
+      "name": "TaskDescription",
+      "discriminator": [
+        24,
+        23,
+        39,
+        0,
+        60,
+        84,
+        62,
+        183
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "TaskAlreadyCompleted",
+      "msg": "The task is already marked as completed."
+    },
+    {
+      "code": 6001,
+      "name": "TaskAlreadyDeleted",
+      "msg": "The task has already been deleted."
+    },
+    {
+      "code": 6002,
+      "name": "TaskAlreadyExists",
+      "msg": "The task already exists."
+    },
+    {
+      "code": 6003,
+      "name": "DescriptionTooLong",
+      "msg": "The task description is too long."
+    },
+    {
+      "code": 6004,
+      "name": "DescriptionTooShort",
+      "msg": "The task description is too short."
+    }
+  ],
+  "types": [
+    {
+      "name": "Task",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "completed",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TaskDescription",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "description",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}
